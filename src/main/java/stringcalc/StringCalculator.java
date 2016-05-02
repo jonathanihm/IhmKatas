@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * Created by jonat on 4/28/2016.
  */
 public class StringCalculator {
-    private List<String> delimiters = new ArrayList();
+    private List<String> delimiters = new ArrayList<>();
 
     public StringCalculator() {
     }
@@ -31,7 +31,7 @@ public class StringCalculator {
             }
 
             String[] splitNums = numbers.split(getMultipleDelimiterRegex(delimiters));
-            List<Integer> negativeNumbers = new ArrayList<Integer>();
+            List<Integer> negativeNumbers = new ArrayList<>();
             for (String num : splitNums) {
                 int number = Integer.parseInt(num);
                 if (number < 0) {
@@ -41,7 +41,7 @@ public class StringCalculator {
                 }
             }
             if (negativeNumbers.size() > 0) {
-                StringBuilder builder = new StringBuilder("negative numbers not allowed: ");
+                StringBuilder builder = new StringBuilder("Negative numbers not allowed:");
                 for (int num : negativeNumbers) {
                     builder.append(" ").append(num);
                 }
@@ -52,6 +52,9 @@ public class StringCalculator {
     }
 
     public int processDelimiters(String line) {
+        if (line == null) {
+            return 0;
+        }
         int lastMatchIndex = 0;
         if (line != null && line.charAt(0) != '[') {
             delimiters.add(String.valueOf(line.charAt(0)));
@@ -67,7 +70,7 @@ public class StringCalculator {
         return lastMatchIndex;
     }
 
-    public String getMultipleDelimiterRegex(List<String> delimiters) {
+    private String getMultipleDelimiterRegex(List<String> delimiters) {
         StringBuilder builder = new StringBuilder("");
         if (delimiters != null) {
             for (int i = 0; i < delimiters.size(); i++) {

@@ -34,24 +34,12 @@ public class FizzBuzz {
             getValue(num, i, builder);
         }
 
-//        if (num % 3 != 0 && num % 5 != 0) {
-//            builder.append(num);
-//        } else {
-//            if (num % 3 == 0) {
-//                builder.append("fizz");
-//                if (num % 5 == 0) {
-//                    builder.append(" buzz");
-//                }
-//            } else if (num % 5 == 0) {
-//                builder.append("buzz");
-//            }
-//        }
         return builder.toString();
     }
 
-    private static void getValue(int num, Iterator i, StringBuilder builder) {
+    private static void getValue(int num, Iterator<Map.Entry<Integer, String>> i, StringBuilder builder) {
         while (i.hasNext()) {
-            Map.Entry<Integer, String> o = (Map.Entry<Integer, String>) i.next();
+            Map.Entry<Integer, String> o = i.next();
             if (!i.hasNext()) {
                 if (num % o.getKey() == 0) {
                     if (builder.toString().length() > 0) {

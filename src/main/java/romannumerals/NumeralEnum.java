@@ -19,9 +19,8 @@ public enum NumeralEnum {
     private String key;
     private int value;
 
-
-    private NumeralEnum(String key, int value) {
-        this.key= key;
+    NumeralEnum(String key, int value) {
+        this.key = key;
         this.value = value;
     }
 
@@ -49,17 +48,16 @@ public enum NumeralEnum {
         return enums[(this.ordinal() + 1) % enums.length];
     }
 
-    // static operations
-    public static String convertToRoman(int number) {
-        if (number < 0) {
+    public static String convertToRoman(int num) {
+        if (num < 0) {
             throw new UnsupportedOperationException("Negative numbers not supported");
-        } else if (number >= 4000) {
+        } else if (num >= 4000) {
             throw new UnsupportedOperationException("Number too large to express for this application");
         }
-        return convertArabicGroup(number);
+        return convertToRomanProcess(num);
     }
 
-    private static String convertArabicGroup(int num) {
+    private static String convertToRomanProcess(int num) {
         StringBuilder builder = new StringBuilder("");
         if (num == 0) {
             return builder.toString();
@@ -69,22 +67,22 @@ public enum NumeralEnum {
             int bound = 4 * e.getValue();
             if (num >= bound) {
                 builder.append(e.getKey()).append(e.next().getKey());
-                builder.append(convertArabicGroup(num - bound));
+                builder.append(convertToRomanProcess(num - bound));
             } else {
                 int repeatNumeral = num / e.getValue();
                 for (int i = 0; i < repeatNumeral; i++) {
                     builder.append(e.getKey());
                 }
-                builder.append(convertArabicGroup(num % e.getValue()));
+                builder.append(convertToRomanProcess(num % e.getValue()));
             }
         } else {
             int bound = 9 * e.prev().getValue();
             if (num >= bound) {
                 builder.append(e.prev().getKey()).append(e.next().getKey());
-                builder.append(convertArabicGroup(num - bound));
+                builder.append(convertToRomanProcess(num - bound));
             } else {
                 builder.append(e.getKey());
-                builder.append(convertArabicGroup(num - e.getValue()));
+                builder.append(convertToRomanProcess(num - e.getValue()));
             }
         }
         return builder.toString();
@@ -92,7 +90,7 @@ public enum NumeralEnum {
 
     public static int convertToArabic(String roman) {
         int sum = 0;
-        for (int i = 0; i < roman.length(); i++){
+        for (int i = 0; i < roman.length(); i++) {
             NumeralEnum current = NumeralEnum.get(roman.substring(i, i + 1));
             if (startsWithOne(current)) {
                 if (i < roman.length() - 1) {

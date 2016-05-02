@@ -1,21 +1,16 @@
 package bowling;
 
-/**
- * Created by jonat on 4/30/2016.
- */
 public class BowlingScore {
     private final static int DEFAULT_FRAMES = 10;
     private final static char STRIKE = 'X';
     private final static char SPARE = '/';
     private final static char MISS = '-';
 
-    private static int frames = DEFAULT_FRAMES;
-
     public static int calculateScore(String line) {
         return calculateScore(line, DEFAULT_FRAMES);
     }
 
-    protected static int calculateScore(String line, int endFrame) {
+    public static int calculateScore(String line, int endFrame) {
         return processGroup(1, endFrame, 0, line);
     }
 
