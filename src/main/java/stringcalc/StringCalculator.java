@@ -51,10 +51,7 @@ public class StringCalculator {
         return answer;
     }
 
-    public int processDelimiters(String line) {
-        if (line == null) {
-            return 0;
-        }
+    private int processDelimiters(String line) {
         int lastMatchIndex = 0;
         if (line != null && line.charAt(0) != '[') {
             delimiters.add(String.valueOf(line.charAt(0)));

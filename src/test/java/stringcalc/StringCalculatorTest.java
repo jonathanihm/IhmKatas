@@ -67,12 +67,6 @@ public class StringCalculatorTest {
         assertEquals(11, calculator.add("5,6,1234"));
     }
 
-    @Test
-    public void getMultipleDelimiterTest() throws Exception {
-        StringCalculator calculator = new StringCalculator();
-        assertEquals(3, calculator.processDelimiters("[*]\n1*2*3"));
-        assertEquals(9, calculator.processDelimiters("[;][,][\n]\n1,2,3"));
-    }
 
     @Test
     public void addMultipleDelimiterVariableLength() throws Exception {

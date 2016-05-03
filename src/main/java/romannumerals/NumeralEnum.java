@@ -8,6 +8,7 @@ import java.util.List;
  * Created by jonat on 4/29/2016.
  */
 public enum NumeralEnum {
+    NULLA("nulla", 0),
     I("I", 1),
     V("V", 5),
     X("X", 10),
@@ -34,8 +35,8 @@ public enum NumeralEnum {
 
     public NumeralEnum prev() {
         NumeralEnum[] enums = NumeralEnum.class.getEnumConstants();
-        if (this.ordinal() == enums.length) {
-            return null;
+        if (this.ordinal() == 0) {
+            return NULLA;
         }
         return enums[(this.ordinal() - 1) % enums.length];
     }
@@ -43,13 +44,15 @@ public enum NumeralEnum {
     public NumeralEnum next() {
         NumeralEnum[] enums = NumeralEnum.class.getEnumConstants();
         if (this.ordinal() == enums.length) {
-            return null;
+            return NULLA;
         }
         return enums[(this.ordinal() + 1) % enums.length];
     }
 
     public static String convertToRoman(int num) {
-        if (num < 0) {
+        if (num == 0) {
+            return NULLA.getKey();
+        } else if (num < 0) {
             throw new UnsupportedOperationException("Negative numbers not supported");
         } else if (num >= 4000) {
             throw new UnsupportedOperationException("Number too large to express for this application");
@@ -58,10 +61,10 @@ public enum NumeralEnum {
     }
 
     private static String convertToRomanProcess(int num) {
-        StringBuilder builder = new StringBuilder("");
         if (num == 0) {
-            return builder.toString();
+            return "";
         }
+        StringBuilder builder = new StringBuilder("");
         NumeralEnum e = getLargestNumeral(num);
         if (startsWithOne(e)) {
             int bound = 4 * e.getValue();
@@ -123,7 +126,7 @@ public enum NumeralEnum {
                 return numeral;
             }
         }
-        return I;
+        return NULLA;
     }
 
     public static boolean startsWithOne(NumeralEnum e) {
@@ -136,6 +139,6 @@ public enum NumeralEnum {
                 return e;
             }
         }
-        return null;
+        return NULLA;
     }
 }

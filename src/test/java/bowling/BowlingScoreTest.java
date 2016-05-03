@@ -56,6 +56,14 @@ public class BowlingScoreTest {
         assertEquals(206, BowlingScore.calculateScore("X5/XX8-XX8/XX4/"));
     }
 
+    @Test(expected=RuntimeException.class)
+    public void incorrectNumberThrowsInLastFrame() throws Exception {
+        BowlingScore.calculateScore("XXXXXXXXXX9-/");
+    }
 
+    @Test(expected=RuntimeException.class)
+    public void incorrectNumberThrowsForFrameCount() throws Exception {
+        BowlingScore.calculateScore("12345-/");
+    }
 
 }

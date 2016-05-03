@@ -11,9 +11,20 @@ public class NumeralEnumTest {
 
     @Test
     public void convertArabicSmall() throws Exception {
+        assertEquals("nulla", NumeralEnum.convertToRoman(0));
         assertEquals("I", NumeralEnum.convertToRoman(1));
         assertEquals("III", NumeralEnum.convertToRoman(3));
         assertEquals("VIII", NumeralEnum.convertToRoman(8));
+    }
+
+    @Test
+    public void convertArabicZero() throws Exception {
+        assertEquals("nulla", NumeralEnum.convertToRoman(0));
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void convertArabicLessThanZero() throws Exception {
+        NumeralEnum.convertToRoman(-230);
     }
 
     @Test
@@ -68,5 +79,11 @@ public class NumeralEnumTest {
         assertEquals(NumeralEnum.V, NumeralEnum.getLargestNumeral(6));
         assertEquals(NumeralEnum.X, NumeralEnum.getLargestNumeral(11));
         assertEquals(NumeralEnum.L, NumeralEnum.getLargestNumeral(51));
+    }
+
+    @Test
+    public void previousAndNextNumeralEnum() throws Exception {
+        assertEquals(NumeralEnum.NULLA, NumeralEnum.I.prev());
+        assertEquals(NumeralEnum.NULLA, NumeralEnum.M.next());
     }
 }
